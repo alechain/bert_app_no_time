@@ -22,7 +22,14 @@ tokenizer, model = get_model()
 # Interfaz de usuario
 st.title("Predicción de artículos de Página 12")
 st.markdown(
-    "Predicción de la sección de Página 12 a la que pertenece un artículo mediante un modelo BERT fine-tunned sin considerar el Horizonte Temporal en el entrenamiento."
+    "### Predicción de la sección de Página 12 a la que pertenece un artículo mediante un modelo BERT fine-tunned sin considerar el Horizonte Temporal en el entrenamiento."
+)
+st.markdown(
+ ''' Elegir una noticia de alguna de las siguientes secciones y copiar el texto del artículo:
+ - https://www.pagina12.com.ar/secciones/el-pais
+ - https://www.pagina12.com.ar/secciones/economia
+ - https://www.pagina12.com.ar/secciones/sociedad
+ - https://www.pagina12.com.ar/secciones/el-mundo '''
 )
 
 user_input = st.text_area('Entrar texto del artículo a analizar')
