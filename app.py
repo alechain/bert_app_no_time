@@ -3,16 +3,21 @@ import numpy as np
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
 #@st.cache_data()
 
+#def get_model():
+#    tokenizer = BertTokenizer.from_pretrained("Recognai/bert-base-spanish-wwm-cased-xnli")
+#    model = BertForSequenceClassification.from_pretrained("alechain/bert-finetunned-no-time")
+#    return tokenizer,model
+@st.cache_resource()
 def get_model():
     tokenizer = BertTokenizer.from_pretrained("Recognai/bert-base-spanish-wwm-cased-xnli")
     model = BertForSequenceClassification.from_pretrained("alechain/bert-finetunned-no-time")
-    return tokenizer,model
+    return tokenizer, model
 
+tokenizer, model = get_model()
 
-tokenizer,model = get_model()
 
 # Interfaz de usuario
 st.title("Predicción de artículos de Página 12")
@@ -31,7 +36,7 @@ MY_DATASET_MAX_TOKENS=512
 
 if user_input and button :
     encoded_dict = tokenizer.encode_plus(
-                    [user_input],                      # Frase a codificar.
+                    user_input,                      # Frase a codificar.
                     add_special_tokens = True, # Agregar '[CLS]' y '[SEP]'
                     max_length = MY_DATASET_MAX_TOKENS,  # Llenar con el token PAD a frases cortas, o truncar frases mas  largas que MAX_TOKENS
                     padding='max_length',
